@@ -23,7 +23,7 @@ print("Suma wag wybranych przedmiotów:", sum_weight)
 print("Suma wartości wybranych przedmiotów:", sum_value)
 print("Sprawdzenie poprawności sumy wartości:", "Poprawne" if sum_value == max_value else "Błąd")
 
-najlepszy, wartosc = genetyczny_plecak(items, capacity, rozmiar_populacji=50, liczba_iteracji=200)
+najlepszy, wartosc = genetyczny_plecak(items, capacity, rozmiar_populacji=100, liczba_iteracji=500)
 
 print("Najlepszy osobnik:", najlepszy)
 print("Wartość:", wartosc)

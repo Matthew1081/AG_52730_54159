@@ -54,18 +54,16 @@ def pseudo_random():
 def randint(a, b):
     return int((b - a + 1) * pseudo_random() + a)
 
+# Funkcja przystosowania dla plecaka
 def fitness(chromosom, items, capacity):
     wartosc = 0
-    waga = 0
     for i in range(len(chromosom)):
         if chromosom[i] == 1:
-            waga += items[i][0]
             wartosc += items[i][1]
-    # teraz nie trzeba kary, bo osobnik zawsze będzie poprawny
     return wartosc
 
+# Funkcja naprawy osobnika – usuwa przedmioty aż waga ≤ capacity
 def napraw_osobnik(chromosom, items, capacity):
-    # usuwa losowe przedmioty aż waga ≤ capacity
     while True:
         waga = sum(items[i][0] for i in range(len(chromosom)) if chromosom[i] == 1)
         if waga <= capacity:
