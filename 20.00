@@ -1,0 +1,2 @@
+najlepszy_osobnik,najlepsza_wartosc,mutacja,krzyzowanie,selekcja,krzyzowanie_typ
+"[0, 1, 1]",220,0.05,0.8,ranking,uniform
