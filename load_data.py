@@ -1,6 +1,6 @@
 from import_data import data_dynamic, dynamic_backpack
 
-sciezka = r"C:\Users\mkwia\Desktop\dsw\algorytmy genetyczne i sztuczne sieci neuronowe\AG_52730_54159\large_scale\knapPI_2_200_1000_1.txt"
+sciezka = "large_scale\knapPI_2_200_1000_1.txt"
 n, capacity, items = data_dynamic(sciezka)
 
 print("Liczba przedmiotów:", n)
