@@ -200,3 +200,21 @@ def krzyzowanie_dwupunktowe(p1, p2):
     dziecko2 = p2[:punkt1] + p1[punkt1:punkt2] + p2[punkt2:]
 
     return dziecko1, dziecko2
+
+def selekcja_turniejowa(populacja, oceny, rozmiar_turnieju=2):
+  
+    n = len(populacja)
+    wybrane = []
+
+    for _ in range(n):
+        # losujemy uczestników turnieju
+        uczestnicy = []
+        for _ in range(rozmiar_turnieju):
+            idx = randint(0, n - 1)
+            uczestnicy.append((oceny[idx], populacja[idx]))
+
+        # wybieramy najlepszego z turnieju
+        najlepszy = max(uczestnicy, key=lambda x: x[0])[1]
+        wybrane.append(najlepszy)
+
+    return wybrane
