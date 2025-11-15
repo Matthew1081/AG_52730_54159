@@ -40,5 +40,97 @@ def dynamic_backpack(n, capacity, items):
     return dp[n][capacity], chosen_items
 
    
+# -------------------------------
+# Algorytm genetyczny dla problemu plecakowego
+# -------------------------------
 
+seed = 42
 
+def pseudo_random():
+    global seed
+    seed = (seed * 9301 + 49297) % 233280
+    return seed / 233280.0
+
+def randint(a, b):
+    return int((b - a + 1) * pseudo_random() + a)
+
+def fitness(chromosom, items, capacity):
+    wartosc = 0
+    waga = 0
+    for i in range(len(chromosom)):
+        if chromosom[i] == 1:
+            waga += items[i][0]
+            wartosc += items[i][1]
+    # teraz nie trzeba kary, bo osobnik zawsze będzie poprawny
+    return wartosc
+
+def napraw_osobnik(chromosom, items, capacity):
+    # usuwa losowe przedmioty aż waga ≤ capacity
+    while True:
+        waga = sum(items[i][0] for i in range(len(chromosom)) if chromosom[i] == 1)
+        if waga <= capacity:
+            break
+        for i in range(len(chromosom)):
+            if chromosom[i] == 1:
+                chromosom[i] = 0
+                break
+    return chromosom
+
+def selekcja(populacja, oceny):
+    suma = sum(oceny)
+    wybrane = []
+    for _ in range(len(populacja)):
+        prog = pseudo_random() * suma
+        akumulacja = 0
+        for i in range(len(populacja)):
+            akumulacja += oceny[i]
+            if akumulacja >= prog:
+                wybrane.append(populacja[i])
+                break
+    return wybrane
+
+def krzyzowanie(p1, p2):
+    punkt = randint(1, len(p1) - 1)
+    dziecko1 = p1[:punkt] + p2[punkt:]
+    dziecko2 = p2[:punkt] + p1[punkt:]
+    return dziecko1, dziecko2
+
+def mutacja(chromosom, prawdopodobienstwo):
+    for i in range(len(chromosom)):
+        if pseudo_random() < prawdopodobienstwo:
+            chromosom[i] = 1 - chromosom[i]
+    return chromosom
+
+def genetyczny_plecak(items, capacity, rozmiar_populacji, liczba_iteracji, prawdopodobienstwo_mutacji=0.01):
+    n = len(items)
+    populacja = []
+    for _ in range(rozmiar_populacji):
+        osobnik = [randint(0, 1) for _ in range(n)]
+        osobnik = napraw_osobnik(osobnik, items, capacity)
+        populacja.append(osobnik)
+
+    najlepszy = populacja[0]
+    najlepsza_ocena = fitness(najlepszy, items, capacity)
+
+    for _ in range(liczba_iteracji):
+        oceny = [fitness(os, items, capacity) for os in populacja]
+
+        for i, ocena in enumerate(oceny):
+            if ocena > najlepsza_ocena:
+                najlepszy = populacja[i]
+                najlepsza_ocena = ocena
+
+        rodzice = selekcja(populacja, oceny)
+        nowa_populacja = []
+        for i in range(0, rozmiar_populacji, 2):
+            p1 = rodzice[i % len(rodzice)]
+            p2 = rodzice[(i + 1) % len(rodzice)]
+            d1, d2 = krzyzowanie(p1, p2)
+            d1 = mutacja(d1, prawdopodobienstwo_mutacji)
+            d2 = mutacja(d2, prawdopodobienstwo_mutacji)
+            d1 = napraw_osobnik(d1, items, capacity)
+            d2 = napraw_osobnik(d2, items, capacity)
+            nowa_populacja.extend([d1, d2])
+        populacja = nowa_populacja[:rozmiar_populacji]
+
+    return najlepszy, najlepsza_ocena

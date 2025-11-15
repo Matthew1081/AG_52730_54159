@@ -1,4 +1,5 @@
-from import_data import data_dynamic, dynamic_backpack
+from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak
+
 
 sciezka = "large_scale\knapPI_2_200_1000_1.txt"
 n, capacity, items = data_dynamic(sciezka)
@@ -21,3 +22,15 @@ for i in chosen_items:
 print("Suma wag wybranych przedmiotów:", sum_weight)
 print("Suma wartości wybranych przedmiotów:", sum_value)
 print("Sprawdzenie poprawności sumy wartości:", "Poprawne" if sum_value == max_value else "Błąd")
+
+najlepszy, wartosc = genetyczny_plecak(items, capacity, rozmiar_populacji=50, liczba_iteracji=200)
+
+print("Najlepszy osobnik:", najlepszy)
+print("Wartość:", wartosc)
+
+suma_wagi = sum(items[i][0] for i in range(len(items)) if najlepszy[i] == 1)
+suma_wartosci = sum(items[i][1] for i in range(len(items)) if najlepszy[i] == 1)
+
+print("Suma wag wybranych przedmiotów:", suma_wagi)
+print("Suma wartości wybranych przedmiotów:", suma_wartosci)
+print("Czy mieści się w plecaku?", "Tak" if suma_wagi <= capacity else "Nie")
