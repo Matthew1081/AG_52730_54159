@@ -141,3 +141,10 @@ def krzyzowanie_jednopunktowe(p1, p2):
     dziecko2 = p2[:punkt] + p1[punkt:]
 
     return dziecko1, dziecko2
+
+def mutacja(chromosom, prawdopodobienstwo):
+    
+    for i in range(len(chromosom)):
+        if pseudo_random() < prawdopodobienstwo:
+            chromosom[i] = 1 - chromosom[i]  # odwrócenie genu
+    return chromosom

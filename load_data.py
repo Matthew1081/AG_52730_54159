@@ -1,4 +1,4 @@
-from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe
+from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe, mutacja
 
 
 sciezka = "large_scale\knapPI_2_200_1000_1.txt"
@@ -49,3 +49,12 @@ def main():
 if __name__ == "__main__":
     main()
 
+def main():
+    chromosom = [1, 0, 1, 1, 0, 0, 1]
+    print("Przed mutacją:", chromosom)
+
+    chromosom_po = mutacja(chromosom, prawdopodobienstwo=0.2)
+    print("Po mutacji:", chromosom_po)
+
+if __name__ == "__main__":
+    main()
