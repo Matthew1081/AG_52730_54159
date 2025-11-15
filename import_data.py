@@ -164,3 +164,27 @@ def selekcja_ruletkowa(populacja, oceny):
                 break
 
     return wybrane
+
+def selekcja_rankingowa(populacja, oceny):
+    
+    # 1. Posortuj indeksy według oceny (od najmniejszej do największej)
+    indeksy = sorted(range(len(oceny)), key=lambda i: oceny[i])
+    
+    # 2. Nadaj prawdopodobieństwa proporcjonalne do pozycji w rankingu
+    # Najlepszy osobnik dostaje największy udział
+    n = len(populacja)
+    rank_weights = [i+1 for i in range(n)]  # [1,2,...,n]
+    suma = sum(rank_weights)
+
+    wybrane = []
+    for _ in range(n):
+        prog = pseudo_random() * suma
+        akumulacja = 0
+        for j, idx in enumerate(indeksy):
+            akumulacja += rank_weights[j]
+            if akumulacja >= prog:
+                wybrane.append(populacja[idx])
+                break
+
+    return wybrane
+

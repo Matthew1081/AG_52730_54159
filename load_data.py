@@ -1,4 +1,4 @@
-from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe, mutacja, selekcja_ruletkowa
+from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe, mutacja, selekcja_ruletkowa, selekcja_rankingowa
 
 
 sciezka = "large_scale\knapPI_2_200_1000_1.txt"
@@ -68,6 +68,23 @@ def main():
     oceny = [10, 30, 60]  # fitness dla A, B, C
 
     nowa_populacja = selekcja_ruletkowa(populacja, oceny)
+
+    print("Populacja przed selekcją:", populacja)
+    print("Oceny:", oceny)
+    print("Populacja po selekcji:", nowa_populacja)
+
+if __name__ == "__main__":
+    main()
+
+def main():
+    populacja = [
+        [1,0,1,0],  # osobnik A
+        [0,1,0,1],  # osobnik B
+        [1,1,0,0]   # osobnik C
+    ]
+    oceny = [10, 30, 60]  # fitness dla A, B, C
+
+    nowa_populacja = selekcja_rankingowa(populacja, oceny)
 
     print("Populacja przed selekcją:", populacja)
     print("Oceny:", oceny)
