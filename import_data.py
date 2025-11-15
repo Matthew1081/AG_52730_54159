@@ -188,3 +188,15 @@ def selekcja_rankingowa(populacja, oceny):
 
     return wybrane
 
+def krzyzowanie_dwupunktowe(p1, p2):
+    
+    n = len(p1)
+    # losujemy dwa różne punkty podziału
+    punkt1 = randint(1, n - 2)
+    punkt2 = randint(punkt1 + 1, n - 1)
+
+    # tworzymy dzieci
+    dziecko1 = p1[:punkt1] + p2[punkt1:punkt2] + p1[punkt2:]
+    dziecko2 = p2[:punkt1] + p1[punkt1:punkt2] + p2[punkt2:]
+
+    return dziecko1, dziecko2

@@ -1,4 +1,4 @@
-from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe, mutacja, selekcja_ruletkowa, selekcja_rankingowa
+from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe, mutacja, selekcja_ruletkowa, selekcja_rankingowa, krzyzowanie_dwupunktowe
 
 
 sciezka = "large_scale\knapPI_2_200_1000_1.txt"
@@ -89,6 +89,20 @@ def main():
     print("Populacja przed selekcją:", populacja)
     print("Oceny:", oceny)
     print("Populacja po selekcji:", nowa_populacja)
+
+if __name__ == "__main__":
+    main()
+
+def main():
+    p1 = [1, 0, 1, 1, 0, 0]
+    p2 = [0, 1, 0, 0, 1, 1]
+
+    dziecko1, dziecko2 = krzyzowanie_dwupunktowe(p1, p2)
+
+    print("Rodzic 1:", p1)
+    print("Rodzic 2:", p2)
+    print("Dziecko 1:", dziecko1)
+    print("Dziecko 2:", dziecko2)
 
 if __name__ == "__main__":
     main()
