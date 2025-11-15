@@ -148,3 +148,19 @@ def mutacja(chromosom, prawdopodobienstwo):
         if pseudo_random() < prawdopodobienstwo:
             chromosom[i] = 1 - chromosom[i]  # odwrócenie genu
     return chromosom
+
+def selekcja_ruletkowa(populacja, oceny):
+  
+    suma = sum(oceny)
+    wybrane = []
+
+    for _ in range(len(populacja)):
+        prog = pseudo_random() * suma  # losowy punkt na kole ruletki
+        akumulacja = 0
+        for i in range(len(populacja)):
+            akumulacja += oceny[i]
+            if akumulacja >= prog:
+                wybrane.append(populacja[i])
+                break
+
+    return wybrane
