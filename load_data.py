@@ -1,4 +1,4 @@
-from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak
+from import_data import data_dynamic, dynamic_backpack, genetyczny_plecak, randint, krzyzowanie_jednopunktowe
 
 
 sciezka = "large_scale\knapPI_2_200_1000_1.txt"
@@ -34,3 +34,18 @@ suma_wartosci = sum(items[i][1] for i in range(len(items)) if najlepszy[i] == 1)
 print("Suma wag wybranych przedmiotów:", suma_wagi)
 print("Suma wartości wybranych przedmiotów:", suma_wartosci)
 print("Czy mieści się w plecaku?", "Tak" if suma_wagi <= capacity else "Nie")
+
+def main():
+    p1 = [1, 0, 1, 1, 0]
+    p2 = [0, 1, 0, 0, 1]
+
+    dziecko1, dziecko2 = krzyzowanie_jednopunktowe(p1, p2)
+
+    print("Rodzic 1:", p1)
+    print("Rodzic 2:", p2)
+    print("Dziecko 1:", dziecko1)
+    print("Dziecko 2:", dziecko2)
+
+if __name__ == "__main__":
+    main()
+

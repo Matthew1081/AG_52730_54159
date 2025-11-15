@@ -132,3 +132,12 @@ def genetyczny_plecak(items, capacity, rozmiar_populacji, liczba_iteracji, prawd
         populacja = nowa_populacja[:rozmiar_populacji]
 
     return najlepszy, najlepsza_ocena
+
+def krzyzowanie_jednopunktowe(p1, p2):
+    n = len(p1)
+    punkt = randint(1, n - 1)
+
+    dziecko1 = p1[:punkt] + p2[punkt:]
+    dziecko2 = p2[:punkt] + p1[punkt:]
+
+    return dziecko1, dziecko2
